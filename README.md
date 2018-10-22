@@ -13,11 +13,11 @@ All responses will have the form
 
 ### Root directory and list of all it's children files and folders
 
-** Definition **
+**Definition**
 
 `GET /root`
 
-** Response **
+**Response**
 
 ```json
 [
@@ -31,11 +31,11 @@ All responses will have the form
 
 ### Specific directory by id and list of all it's children files and folders
 
-** Definition **
+**Definition**
 
 `GET /{folder_id}`
 
-** Response **
+**Response**
 
 ```json
 [
