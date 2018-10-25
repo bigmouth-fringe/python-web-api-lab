@@ -22,9 +22,23 @@ All responses will have the form
 ```json
 [
     {
-        "directory_id": "42",
-        "title": "TrueMeaningOfLife",
-        "children": [{"directory_id": "1", "title": "FirstChild"}, {"directory_id": "2", "title": "second_child"}],
+        "name":".",
+        "path":".",
+        "type":"directory",
+        "children": [
+            {
+                "name":"MyInnerDirectory",
+                "type":"directory",
+                "path":".\\.MyInnerDirectory",
+                "children": [
+                    {
+                        "name":"MyFile",
+                        "path":".\\.MyInnerDirectory\\MyFile",
+                        "type":"file"
+                    }
+                ]
+            }
+        ]
     }
 ]
 ```
@@ -33,16 +47,12 @@ All responses will have the form
 
 **Definition**
 
-`GET /{folder_id}`
+`GET /download`
 
 **Response**
 
 ```json
 [
-    {
-        "directory_id": "2077",
-        "title": "MyVeryPrivateFolder",
-        "children": [{"directory_id": "45", "title": "PhotosFromVacation"}, {"directory_id": "2", "title": "Passwords"}],
-    }
+    *file content*
 ]
 ```
