@@ -30,12 +30,12 @@ def root():
 @app.route("/download", methods=['GET'])
 def download():
     filepath = request.args.get('filepath')
-    return send_file(os.path.abspath(filepath))
+    return send_file(os.path.abspath(filepath), as_attachment=True)
 
 
 def path_to_dict(path):
     d = {'name': os.path.basename(path)}
-    d['path'] = path
+    d['path'] = path.replace('\\','/') 
     if os.path.isdir(path):
         d['type'] = "directory"
         d['children'] = [path_to_dict(os.path.join(path,x)) for x in os.listdir(path)]
