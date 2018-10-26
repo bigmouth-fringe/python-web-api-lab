@@ -20,11 +20,11 @@
             {
                 "name":"MyInnerDirectory",
                 "type":"directory",
-                "path":".\\.MyInnerDirectory",
+                "path":"./MyInnerDirectory",
                 "children": [
                     {
                         "name":"MyFile",
-                        "path":".\\.MyInnerDirectory\\MyFile",
+                        "path":"./MyInnerDirectory/MyFile",
                         "type":"file"
                     }
                 ]
@@ -34,11 +34,14 @@
 ]
 ```
 
-### Specific directory by id and list of all it's children files and folders
+### Download a specific file by it's path
 
 **Definition**
 
 `GET /download`
+
+**URL Params**
+`filepath=[string]`
 
 **Response**
 
