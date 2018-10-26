@@ -16,16 +16,16 @@ UPLOAD_FOLDER = '.'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route("/")
+@app.route('/')
 def index():
     with open(os.path.dirname(app.root_path) + '/README.md', 'r') as markdown_file:
         content = markdown_file.read()
         return markdown.markdown(content)
 
 
-@app.route("/root", methods=['GET'])
+@app.route('/root', methods=['GET'])
 def root():
-    return json.dumps(path_to_dict('.'))
+    return json.dumps(__path_to_dict('.'))
 
 @app.route("/download", methods=['GET'])
 def download():
@@ -33,12 +33,12 @@ def download():
     return send_file(os.path.abspath(filepath), as_attachment=True)
 
 
-def path_to_dict(path):
+def __path_to_dict(path):
     d = {'name': os.path.basename(path)}
     d['path'] = path.replace('\\','/') 
     if os.path.isdir(path):
-        d['type'] = "directory"
-        d['children'] = [path_to_dict(os.path.join(path,x)) for x in os.listdir(path)]
+        d['type'] = 'directory'
+        d['children'] = [__path_to_dict(os.path.join(path,x)) for x in os.listdir(path)]
     else:
-        d['type'] = "file"
+        d['type'] = 'file'
     return d
