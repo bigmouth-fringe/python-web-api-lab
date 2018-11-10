@@ -20,14 +20,32 @@
             {
                 "name":"MyInnerDirectory",
                 "type":"directory",
-                "path":"./MyInnerDirectory",
-                "children": [
-                    {
-                        "name":"MyFile",
-                        "path":"./MyInnerDirectory/MyFile",
-                        "type":"file"
-                    }
-                ]
+                "path":"./MyInnerDirectory"
+            }
+        ]
+    }
+]
+```
+
+### Get specific directory and it's children by path
+
+**Definition**
+
+`GET /directory/<path:filepath>`
+
+**Response**
+
+```json
+[
+    {
+        "name":".",
+        "path":".",
+        "type":"directory",
+        "children": [
+            {
+                "name":"MyInnerDirectory",
+                "type":"directory",
+                "path":"./MyInnerDirectory"
             }
         ]
     }
@@ -38,23 +56,25 @@
 
 **Definition**
 
-`GET /download`
+`GET /download/<path:filepath>`
 
-**URL Params**
-`filepath=[string]`
+
+### Post specific directory by new path
+
+**Definition**
+
+`GET /directory/<path:filepath>`
 
 **Response**
 
-```python
-    import os
-    from flask import Flask
-    from flask import markdown
-
-    app = Flask(__name__)
-
-    @app.route("/")
-    def index():
-    with open(os.path.dirname(app.root_path) + '/README.md', 'r') as markdown_file:
-        content = markdown_file.read()
-        return markdown.markdown(content)
+```json
+{
+    "data": {
+        "name": "NewFolder",
+        "path": "FileManagement/NewFolder",
+        "type": "directory"
+    },
+    "message": "You successfully created new directory",
+    "success": true
+}
 ```
