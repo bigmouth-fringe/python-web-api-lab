@@ -1,5 +1,6 @@
 import os
 import json
+import shutil
 
 from flask import Flask
 from flask import request
@@ -50,6 +51,16 @@ def post_directory(filepath):
         )
     else: 
         return jsonify(success = False, message = 'Something went wrong :(')
+
+@app.route('/directory/<path:filepath>', methods=['DELETE'])
+def delete_directory(filepath):
+    if _delete_directory(filepath) != -1:
+        return jsonify(
+            success = True, 
+            message = 'You successfully deleted directory', 
+        )
+    else: 
+        return jsonify(success = False, message = 'Something went wrong :(')
         
 
 def _get_directory(path, show_children = True):
@@ -66,5 +77,11 @@ def _get_directory(path, show_children = True):
 def _post_directory(filepath):
     if not os.path.exists(filepath):
         os.makedirs(filepath)
+    else: 
+        return -1
+
+def _delete_directory(filepath):
+    if os.path.exists(filepath):
+        shutil.rmtree(filepath)
     else: 
         return -1

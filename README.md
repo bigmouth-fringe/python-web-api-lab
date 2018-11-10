@@ -58,12 +58,11 @@
 
 `GET /download/<path:filepath>`
 
-
 ### Post specific directory by new path
 
 **Definition**
 
-`GET /directory/<path:filepath>`
+`POST /directory/<path:filepath>`
 
 **Response**
 
@@ -75,6 +74,21 @@
         "type": "directory"
     },
     "message": "You successfully created new directory",
+    "success": true
+}
+```
+
+### Delete specific directory by it's path
+
+**Definition**
+
+`DELETE /directory/<path:filepath>`
+
+**Response**
+
+```json
+{
+    "message": "You successfully deleted directory",
     "success": true
 }
 ```
