@@ -2,7 +2,7 @@
 
 ## Usage
 
-### Root directory and list of all it's children files and folders
+### Get root directory and list of all it's children files and folders
 
 **Definition**
 
