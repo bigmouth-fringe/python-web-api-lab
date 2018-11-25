@@ -8,6 +8,7 @@ from flask import Response
 from flask import jsonify
 from flask import send_file
 from flask import abort
+from flask_cors import CORS
 import markdown
 
 UPLOAD_FOLDER = '.'
@@ -15,6 +16,7 @@ UPLOAD_FOLDER = '.'
 # Instance of Flask
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+CORS(app)
 
 @app.route('/')
 def index():
@@ -32,6 +34,13 @@ def get_directory(filepath):
         return json.dumps(_get_directory(filepath))
     else:
         abort(400)
+
+@app.route('/directories/<path:rootpath>', methods=['GET'])
+def get_directories(rootpath):
+    if os.path.exists(rootpath):
+        children = [_get_directory(os.path.join(rootpath, x), False) for x in os.listdir(rootpath)]
+        return json.dumps(children)
+
 
 @app.route('/download/<path:filepath>', methods=['GET'])
 def download(filepath):
