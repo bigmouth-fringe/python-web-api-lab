@@ -40,11 +40,13 @@ def get_directories(rootpath):
     if os.path.exists(rootpath):
         children = [_get_directory(os.path.join(rootpath, x), False) for x in os.listdir(rootpath)]
         return json.dumps(children)
+    else:
+        abort(400)
 
 
 @app.route('/download/<path:filepath>', methods=['GET'])
 def download(filepath):
-    if os.path.exists(filepath):
+    if os.path.exists(filepath) and os.path.isfile(filepath):
         return send_file(os.path.abspath(filepath), as_attachment=True)
     else:
         abort(400)

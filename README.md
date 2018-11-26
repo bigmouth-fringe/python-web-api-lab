@@ -52,6 +52,36 @@
 ]
 ```
 
+### Get children files for directory by it's path
+
+**Definition**
+
+`GET /directories/<path:rootpath>`
+
+**Response**
+
+```json
+[
+    {
+        "name":".xyzzy",
+        "path":"./xyzzy",
+        "type":"directory",
+        "children": [
+            {
+                "name":"MyInnerDirectory",
+                "type":"directory",
+                "path":"./MyInnerDirectory"
+            }
+        ]
+    },
+    {
+        "name":"sample_picture.png",
+        "path":"./sample_picture.png",
+        "type":"file"
+    }
+]
+```
+
 ### Download a specific file by it's path
 
 **Definition**

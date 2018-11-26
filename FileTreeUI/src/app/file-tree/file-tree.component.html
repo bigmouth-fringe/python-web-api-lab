@@ -1,1 +1,10 @@
-<tree-root [nodes]="treeNodes"></tree-root>
+<tree-root  #tree
+            [nodes]="treeNodes"
+            (toggleExpanded)="onExpand($event)"
+            (nodeActivate)="onSelect($event)"
+            (nodeDeactivate)="onUnselect()">
+</tree-root>
+
+<button *ngIf="selectedNode && selectedNode.data.type === 'file'" (click)="onDownloadClick()">Download</button>
+<button *ngIf="selectedNode && selectedNode.data.type === 'directory'" (click)="onCreateClick()">Create New Folder</button>
+<button *ngIf="selectedNode && selectedNode.data.type === 'directory'" (click)="onDeleteClick()">Delete Folder</button>
